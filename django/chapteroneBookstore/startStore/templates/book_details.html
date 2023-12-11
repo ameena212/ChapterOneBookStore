@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ book.title_tag }}
+{% endblock %}
+
+{% block content %}
+
+<h1>{{ book.title }} </h1>
+
+<small>By: {{ book.author }}</small>
+
+<hr>
+<br />
+<img src="{{ book.header_image.url }}" height="500px" weight="500px">
+<br /><br />
+<p><strong>Description:</strong> {{ book.description }}</p>
+<p><strong>Price:</strong> {{ book.price }} BHD</p>
+<p><strong>Contact:</strong> {{ book.contact }}</p>
+<p><strong>Country:</strong> {{ book.country }}</p>
+<br /><br />
+<a href="{% url 'sell_books' %}" class="btn btn-secondary">BACK</a>
+
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+<div class="container mt-4">
+    <h1 class="mb-4">Our books</h1>
+
+    <div class="row">
+        {% for product in products %}
+        <div class="col-sm-4 mb-4">
+            <div class="card">
+                <img src="{{ product.image.url }}" alt="{{ product.name }}" class="card-img-top" height="400px"
+                    style="object-fit: cover;">
+                <div class="card-body">
+                    <h5 class="card-title">{{ product.name }}</h5>
+                    <p class="card-text">{{ product.price }} BHD</p>
+                    <form method="post" action="{% url 'add_to_cart' product.id %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="quantity" value="1">
+                        <button type="submit" class="btn btn-dark">Add to Cart</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+</div>
+{% endblock %}

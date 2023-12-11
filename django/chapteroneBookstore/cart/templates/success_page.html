@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Success Page
+{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4">Success Page</h1>
+    <div class="alert alert-success" role="alert">
+        {{ request.GET.message }}
+    </div>
+    <a class="btn btn-dark" href="{% url 'store' %}">Done</a>
+</div>
+{% endblock %}

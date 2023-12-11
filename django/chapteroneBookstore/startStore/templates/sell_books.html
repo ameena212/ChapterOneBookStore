@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<br>
+
+<h1>Book you wish to sell</h1>
+<br>
+<br>
+
+<a class="btn btn-outline-dark" href="{% url 'add_sell_books' %}">Sell books</a>
+<br><br>
+<hr>
+<div class="row">
+    {% for book in object_list %}
+    <div class="col-md-4">
+        <div class="card mb-4">
+            {% if book.header_image %}
+            <img src="{{ book.header_image.url }}" height="400px" width="400px" class="card-img-top"
+                alt="{{ book.title }}">
+            {% else %}
+   
+            <img src="{% static 'images/imagesSite/default-image.jpg' %}" height="400px" width="400px"
+                class="card-img-top" alt="{{ book.title }}">
+            {% endif %}
+            <div class="card-body">
+                <h5 class="card-title">{{ book.title }}</h5>
+                <p class="card-text"><strong>Price:</strong> {{ book.price }} BHD</p>
+                <p class="card-text"><strong>Contact:</strong> {{ book.contact }}</p>
+                <a href="{% url 'book-details' book.pk %}" class="btn btn-primary"
+                    style="background-color: black; color: white; border: none;">Details</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

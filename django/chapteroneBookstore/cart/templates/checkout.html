@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Checkout
+{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4">Checkout</h1>
+    <ul class="list-group">
+        {% for product in products_in_cart %}
+        <li class="list-group-item">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h5 class="mb-0">{{ product.name }}</h5>
+                    <small>Quantity: {{ product.quantity }}</small>
+                </div>
+                <span class="font-weight-bold">Total Price: {{ product.total_price }} BHD</span>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+
+    <h3 class="mt-4">Total Price: {{ total_price }} BHD</h3>
+
+    <!-- Address Form -->
+    <form method="post" action="{% url 'process_order' %}">
+        {% csrf_token %}
+
+        <h2 class="mt-4">Delivery Address</h2>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="first_name">First Name:</label>
+                <input type="text" class="form-control" id="first_name" name="first_name" required>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="last_name">Last Name:</label>
+                <input type="text" class="form-control" id="last_name" name="last_name" required>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="country">Country:</label>
+                <input type="text" class="form-control" id="country" name="country" required>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="city">City:</label>
+                <input type="text" class="form-control" id="city" name="city" required>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="address">Address:</label>
+            <textarea id="address" name="address" class="form-control" required></textarea>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="phone">Phone:</label>
+                <input type="tel" class="form-control" id="phone" name="phone" required>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+        </div>
+
+        <!-- buy -->
+
+        <button type="submit" class="btn btn-dark mt-3">Complete Purchase</button>
+    </form>
+</div>
+{% endblock %}
